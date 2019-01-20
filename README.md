@@ -1,6 +1,6 @@
 # MPhys_Project
 
-See below descriptions of each script, number in the correct order to be compiled necessary to execute the pipeline.
+See below descriptions of each script, numbered in the correct order to be compiled necessary to execute the pipeline.
 
 1. createNIFTY.lua: For a particular patient identifies DCM T2 and DIXON scans based on filesize, creates mask expansions and then exports images in a NifTi format for use in PyRadiomics.
 
