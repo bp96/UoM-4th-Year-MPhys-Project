@@ -1,4 +1,4 @@
-# MPhys_Project
+# MPhys_Project_S1
 
 See below descriptions of each script, numbered in the correct order to be compiled necessary to execute the pipeline.
 
