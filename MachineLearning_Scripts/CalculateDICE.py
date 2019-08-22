@@ -2,7 +2,6 @@ import keras.backend as K
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def dice_coef(y_true, y_pred):
     """
     Dice = (2*|X & Y|)/ (|X|+ |Y|)
@@ -18,11 +17,6 @@ def dice_coef(y_true, y_pred):
     
     dice=(2*intersection)/(modX+modY)
     return dice
-    
-#    intersection = K.sum(K.abs(y_true * y_pred), axis=-1)
-#    return (2. * intersection + smooth) / (K.sum(K.square(y_true),-1) + K.sum(K.square(y_pred),-1) + smooth)
-    
-    
     
 #######################################################
 # Set directories
