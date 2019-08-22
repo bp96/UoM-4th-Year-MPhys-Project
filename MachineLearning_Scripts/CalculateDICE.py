@@ -43,7 +43,6 @@ if loadVal:
     MasksPath = r"C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\NiftiDataSet\valMasks_T2Only.npz" # set path for test .npz masks file
     PredictionsPath=r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\predictions_val.npy' # test path for predictions
     
-
 #######################################################
 # Generate arrays
 #######################################################
@@ -62,7 +61,6 @@ if calcDice:
     diceAvg=0
     sizeOfSet=Predictions.shape[0]
     for i in range(0, Predictions.shape[0]):
-
         actualVal=Masks[i,:,:,1]
         predictVal=Predictions[i,:,:,1]
         diceVal=dice_coef(actualVal, predictVal)
@@ -73,12 +71,10 @@ if calcDice:
     print("Max Dice val: ", max(allDiceVals))
     print("Min Dice val: ", min(allDiceVals))
     
-    
     showSlice=True  ## THIS WILL DISPLAY ONE OF THE SLICES IF TRUE
     if showSlice:
         sliceNumber=np.argmax(allDiceVals) # select slice number
         plt.imshow(Slices[sliceNumber,:,:,1], cmap='gray', alpha=1.0)
-        
         plt.imshow(Masks[sliceNumber,:,:,1], cmap='Greens', alpha=0.9)
         plt.imshow(Predictions[sliceNumber,:,:,1], cmap='jet', alpha=0.8)
         plt.colorbar()
