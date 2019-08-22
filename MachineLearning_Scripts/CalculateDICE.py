@@ -1,6 +1,14 @@
+#######################################################
+# Import modules
+#######################################################
+
 import keras.backend as K
 import numpy as np
 import matplotlib.pyplot as plt
+
+#######################################################
+# Functions
+#######################################################
 
 def dice_coef(y_true, y_pred):
     """
@@ -20,7 +28,7 @@ def dice_coef(y_true, y_pred):
     
 #######################################################
 # Set directories
-##########################################################
+#######################################################
 
 loadTest=True  ######### LOAD TEST FILES
 loadVal=False  ########## LOAD VALIDATION FILES ---ONLY SET ONE OF THESE TO TRUE!
@@ -36,16 +44,18 @@ if loadVal:
     PredictionsPath=r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\predictions_val.npy' # test path for predictions
     
 
-##################################################
+#######################################################
 # Generate arrays
-#####################################################
+#######################################################
+
 Slices = np.load(SlicesPath)['arr_0']
 Masks = np.load(MasksPath)['arr_0']
 Predictions = np.load(PredictionsPath)
 
-############################################
+#######################################################
 # Dice calculation
-#############################################
+#######################################################
+
 calcDice=True ## this will calculate Dice average
 if calcDice:
     allDiceVals=[]
@@ -73,12 +83,6 @@ if calcDice:
         plt.imshow(Predictions[sliceNumber,:,:,1], cmap='jet', alpha=0.8)
         plt.colorbar()
         
-        
-        
-###########################################
+#######################################################
 # End of code
-###########################################
-                
-                
-                
-                
+#######################################################        
