@@ -250,15 +250,3 @@ if print_all_test:
         
     #ani = animation.ArtistAnimation(fig, imsTest, interval=50, blit=True, repeat_delay=1000)
     #ani.save('dynamic_images.mp4')
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
