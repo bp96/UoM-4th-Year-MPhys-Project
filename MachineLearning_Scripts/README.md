@@ -1,4 +1,4 @@
-# MPhys_Project_S1_Radiomics
+# MPhys_Project_S2_MachineLearning
 
 See below descriptions of each script, numbered in the correct order to be compiled necessary to execute the pipeline.
 
