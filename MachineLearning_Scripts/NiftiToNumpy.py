@@ -1,23 +1,25 @@
 # Code generates Numpy (.npz) arrays for use with the trainVGGSegModel
 # only the file paths for training and validation data sets need to be changed for now
 # THINGS TO ADJUST: FILE PATHS, SIZE OF THE NUMPY ARRAYS TO CORRESPOND TO NIFTI WIDTHS, LOOP THROUGH ALL SLICES
-#################################
+###########################################################
 # Import libraries
-###########################################
+###########################################################
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 import SimpleITK as sitk
 
-############################################
+###########################################################
 # Functions
-#############################################
+###########################################################
+
 def DirectoryExtract(d):
     return [os.path.join(d, f) for f in os.listdir(d)]
 
 ###########################################################
 # Define training and validation folder paths - CHANGE THESE
-############################################################
+###########################################################
 # Define folder paths for training and validation. Set up as follows: Parent folder ---> Training and Validation subfolders ---> each then has a subfolder for .nii images and .nii masks
     
 # Training folder paths for directory with .nii image slices and .nii mask files - CHANGE THESE
@@ -28,9 +30,9 @@ ValMasksListPath = r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSe
 testSlicesListPath = r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\NiftiDataSet\Test\NiiImages'
 testMasksListPath = r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\NiftiDataSet\Test\NiiMasks'
 
-##################################################
+###########################################################
 # Generate .npz files -DOES NOT NEED TO BE CHANGED
-###################################################
+###########################################################
 
 SlicesList = DirectoryExtract(slicesListPath)
 MasksList = DirectoryExtract(masksListPath)
@@ -47,17 +49,19 @@ nTrainLen = len(SlicesList)
 nValLen = len(ValSlicesList)
 nTestLen=len(testSlicesList)
 
-#########################################
+###########################################################
 # Set variables -- CHANGE THESE IF NEEDED!
-##########################################
+###########################################################
+
 xDim=160
 yDim=160
 imgChannels=3
 maskChannels=2
 
-###################################################
+###########################################################
 # Create arrays
-###################################################
+###########################################################
+
 totalTrainingSlices=0
 for k in range(0,nTrainLen):
     niiImg = sitk.ReadImage(SlicesList[k])
@@ -89,9 +93,10 @@ testMasksArray = np.zeros((totalTestSlices, xDim, yDim, maskChannels), dtype=np.
 trainingOn=False
 validationOn=True
 testOn=True
-##################################################################################
+###########################################################
 # GENERATE TRAINING NUMPY ARRAYS
-#################################################################################
+###########################################################
+
 if trainingOn:
     currentArrayIndex=0
     trainingSkipped=0
@@ -108,8 +113,7 @@ if trainingOn:
     # Normalise the array
         niiSlices = niiSlices/np.max(niiSlices)
         niiMasks = niiMasks/np.max(niiMasks)
-        
-        
+  
         for o in range(0,len(niiSlices)):
             selectedNiiSlice = niiSlices[o,:xDim,:yDim]
             selectedNiiMask = niiMasks[o,:xDim,:yDim]
@@ -127,9 +131,11 @@ if trainingOn:
             except:
                 trainingSkipped=trainingSkipped+1
                 continue
-######################################################################
+                
+###########################################################
 # GENERATE VALIDATION NUMPY ARRAYS
-#################################################################
+###########################################################
+
 if validationOn:
     currentValArrayIndex=0
     validationSkipped=0
@@ -163,9 +169,10 @@ if validationOn:
                 validationSkipped=validationSkipped+1
                 continue
             
-######################################################################
+###########################################################
 # GENERATE TEST NUMPY ARRAYS
-#################################################################
+###########################################################
+
 if testOn:
     currentTestArrayIndex=0
     testSkipped=0
@@ -199,9 +206,9 @@ if testOn:
                 testSkipped=testSkipped+1
                 continue
 
-#######################################################################################
+###########################################################
 # Export generated .npz arrays - DOES NOT NEED TO BE CHANGED
-######################################################################################    
+###########################################################
 
 if trainingOn:
     slicesArray = slicesArray[:(totalTrainingSlices-trainingSkipped),:,:,:]
@@ -215,21 +222,17 @@ if validationOn:
     np.savez(r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\NiftiDataSet\valSlices_T2Only.npz', valSlicesArray)
     np.savez(r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\NiftiDataSet\valMasks_T2Only.npz', valMasksArray)
                               
-    
 if testOn:
     testSlicesArray = testSlicesArray[:(totalTestSlices-testSkipped),:,:,:]
     testMasksArray = testMasksArray[:(totalTestSlices-testSkipped),:,:,:]  
     np.savez(r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\NiftiDataSet\testSlices_T2Only.npz', testSlicesArray)
     np.savez(r'C:\Users\Brijesh Patel\Desktop\MPhys Project\Sensitive\2DSegmentationUVGG-master\NiftiDataSet\testMasks_T2Only.npz', testMasksArray)
     
-    
 #   View numpy array slices using matplotlib
-
 viewSlice = True # True False
 slice = 24
 
 if viewSlice:
-
     fig, axes = plt.subplots(1, 2, figsize=(12, 6),
                              subplot_kw={'xticks': np.linspace(0,160,8,endpoint=False), 'yticks': np.linspace(0,160,8,endpoint=False)})
     list = [slicesArray[slice,:,:,:], slicesArray[slice,:,:,:]]
@@ -238,4 +241,6 @@ if viewSlice:
     img2 = plt.imshow(masksArray[slice,:,:,0], cmap='gray', alpha = 0.4)
     plt.show()
 
-############## End of code ##############################################
+###########################################################
+# End of code
+###########################################################
