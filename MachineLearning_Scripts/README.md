@@ -10,8 +10,8 @@ See below descriptions of each script, numbered in the correct order to be compi
 
 4. segmentationLosses.py: Functions to calculate the Dice coefficient, the soft Dice or the logistic loss between prediction and target values.
 
-5. createVGGSegModel.py [PRIVATE]: Function to build and return a keras model for segmentation. The model is based on parts of a pre-trained VGG16 model returns a VGG16 based, UNet-like segmentation network model which uses the preloaded weights to generate predictions.
+5. createVGGSegModel.py: Function to build and return a keras model for segmentation. The model is based on parts of a pre-trained VGG16 model returns a VGG16 based, UNet-like segmentation network model which uses the preloaded weights to generate predictions.
 
-6. trainVGGSegModel.py [PRIVATE]: Uses 5. to train the VGG16 model, generating a file containing weights which can be used to provide predictions. Training, validation and test data sets are required.
+6. trainVGGSegModel.py: Uses 5. to train the VGG16 model, generating a file containing weights which can be used to provide predictions. Training, validation and test data sets are required.
 
 7. ROC_analysis.py: Code to input the predictions Numpy array, allow thresholding and compare with the original target array, generating a Receiver Operating Characteristic (ROC) curve as well as calculating the Area Under Curve (AUC) value.
