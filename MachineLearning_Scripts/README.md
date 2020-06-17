@@ -1,6 +1,6 @@
 # MPhys_Project_S2_MachineLearning
 
-See below descriptions of each script, numbered in the correct order to be compiled necessary to generate and train a machine learning model (based on a VGG16 based, UNet-like segmentation network model).
+See below descriptions of each script, numbered in the correct order to be compiled necessary to generate and train a machine learning model (based on a UNet-like segmentation network model).
 
 1. NiftiToNumpy.py: Script to convert NiFTi files into Numpy files for use in the machine learning code.
 
